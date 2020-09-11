@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import os
-from src import Config, Scraper
+from src import Config, Scraper, FileFormat
 
 MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -10,3 +10,4 @@ if __name__ == "__main__":
 	CONFIG = Config(MODULE_PATH)
 	conn = Scraper(CONFIG.url, os.path.join(MODULE_PATH, "failed"))
 	conn.connect(CONFIG.username, CONFIG.password)
+	print(conn.download_latest_edition(FileFormat.epub))
