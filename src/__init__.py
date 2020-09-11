@@ -3,3 +3,4 @@
 
 from src.Config import Config
 from src.Scraper import Scraper, FileFormat
+from src.Calibre import Calibre
