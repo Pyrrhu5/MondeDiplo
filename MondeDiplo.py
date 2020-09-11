@@ -8,6 +8,7 @@ MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if __name__ == "__main__":
 	CONFIG = Config(MODULE_PATH)
-	conn = Scraper(CONFIG.url, os.path.join(MODULE_PATH, "failed"))
-	conn.connect(CONFIG.username, CONFIG.password)
-	print(conn.download_latest_edition(FileFormat.epub))
+	conn = Scraper(CONFIG.diploUrl, os.path.join(MODULE_PATH, "failed"))
+	conn.connect(CONFIG.diploUsername, CONFIG.diploPassword)
+	ebookPath = conn.download_latest_edition(FileFormat.epub)
+	if ebook: print(f"Successfully downloaded ebook: {ebookPath}")
