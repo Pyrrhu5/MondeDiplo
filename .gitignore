@@ -3,9 +3,13 @@ __pycache__
 *.sqlite
 *.db
 .*.swp
+*.log
+*.har
+*.html
 .DS_Store
 .private
 .secret
 .env
 others
 venv
+failed
