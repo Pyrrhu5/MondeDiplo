@@ -12,6 +12,7 @@ class Scraper():
 		self.url = url
 		self.failedDir = self._set_failed_dir(failedDir)
 		self.session = None
+		self.tempFiles = set()
 		self.headers = {
 			"User-Agent":"Mozilla/5"
 		}
@@ -126,10 +127,21 @@ class Scraper():
 			filepath = os.path.join("/tmp", filename)
 			with open(filepath, "wb") as f:
 				f.write(req.content)
+			self.tempFiles.add(filepath)
 			return filepath 
+
+	def _clean_temp(self):
+		print(f"Cleaning {len(self.tempFiles)} temporary file(s)...")
+
+		while len(self.tempFiles) != 0:
+			toDel = self.tempFiles.pop()
+			os.remove(toDel)
 
 	def __str__(self):
 		return f"Scraper object for {self.url}. Connected: {self.is_connected()}"
+
+	def __del__(self):
+		self._clean_temp()	
 
 
 class FileFormat():
