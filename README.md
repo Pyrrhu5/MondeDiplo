@@ -1,8 +1,43 @@
-# <++>
+# MondeDiplo
 
-**Version**: <++> 
+Download the last edition of _le monde diplomatique_ and add it to a Calibre's content server.
 
-<++>
+Calibre should be running with the content server enabled and a user set.
+
+A legit subscription to the newspaper is required.
+
+Only tested on Linux.
+
+## Setup Calibre content server
+
+```sh
+sudo apt install -y calibre
+```
+
+**Service**
+
+Replace the data in `< >`
+```sh
+echo"[Unit]
+Description=Calibre Content Server
+After=network.target
+
+[Service]
+Type=simple
+User=<UNIX USER>
+ExecStart=/usr/bin/calibre-server --port 8083 <EBOOKS LIBRARY PATH>
+ 
+[Install]
+WantedBy=default.target
+" | sudo tee /etc/systemd/system/calibre-server.service 
+```
+
+```sh
+sudo systemctl enable calibre-server 
+sudo systemctl start calibre-server 
+```
+
+Calibre is now accessible from `localhost:8083`
 
 ## Installation
 
@@ -10,14 +45,8 @@
 
 Python version 3.6 or above
 
-_On Linux/Mac:_
 ```bash
 python3 --version
-```
-
-_On Windows_:
-```bash
-python --version
 ```
 
 **Clone the repository**
@@ -29,63 +58,56 @@ git --version
 
 Clone it
 ```bash
-git clone <++> <Where you want to install it>
+git clone https://aymericdeschard@bitbucket.org/aymericdeschard/nikoniko.git
+```
+
+**Virtual env**
+
+Optional, but `Run.sh` assumes you have setup a virtual env as such:
+
+```bash
+python3 -m venv venv
 ```
 
 **Dependencies**
 
-Install dependencies:
-
-_On Linux/Mac:_
+Activate the virtual env first:
 ```bash
-pip3 install -r requirements.txt
+source ./venv/bin/activate
 ```
 
-_On Windows_:
+Install dependencies:
+
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 **Executable**
 
 Allows execution of entry point (not needed for Windows)
 ```bash
-chmod +x <++>
+chmod +x MondeDiplo.py
 ```
-
-**Bash shortcut**
-
-If you want to access it directly from the terminal (Linux and MacOsX) with the command `<++>`:
-
+or, if using the virtual env
 ```bash
-INSTALL_DIR="<the full path to the installation directory>"
-printf "# <++>\nalias <++>='${INSTALL_DIR}/<++>.py'" >> ~/.bash_aliases
+chmod +x Run.sh
 ```
 
-**Update**
+**Crontab**
+
+Get it every 5th of each month.
+```
+00 04 5 * * <install path>/mondediplo/Run.sh >> <where you want the logs>/mondediplo.log
+```
+
+## Update
 
 ```bash
 git pull
 ```
 
-## Documentation
-See <++> 
-
-## Changelog
-See <++>
 
 ## License
 Unmodified [MIT license](https://opensource.org/licenses/MIT)
 
 See `License.md`
-
-## Contributing
-
-I welcome any suggestion, corrections or improvements via push requests or email.
-
-Please do report any bugs with:
-
-- the error message,
-- the log,
-- the steps to reproduce it,
-- the OS type and version
