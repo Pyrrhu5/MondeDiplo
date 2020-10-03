@@ -14,6 +14,11 @@ Only tested on Linux.
 sudo apt install -y calibre
 ```
 
+**Setup users**
+```sh
+calibre-server --userdb <PATH TO USER DATABASE> --manage-users
+```
+
 **Service**
 
 Replace the data in `< >`
@@ -25,7 +30,7 @@ After=network.target
 [Service]
 Type=simple
 User=<UNIX USER>
-ExecStart=/usr/bin/calibre-server --port 8083 <EBOOKS LIBRARY PATH>
+ExecStart=/usr/bin/calibre-server --userdb <PATH TO USER DATABASE> --enable-auth --port 8083 <EBOOKS LIBRARY PATH>
  
 [Install]
 WantedBy=default.target
