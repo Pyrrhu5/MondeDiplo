@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import os
+from datetime import datetime
 from src import Config, \
 				Scraper, \
 				FileFormat, \
@@ -10,6 +11,7 @@ from src import Config, \
 MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if __name__ == "__main__":
+	print(f"{'='*5} {datetime.now().strftime('%Y-%m-%D')} {'='*5}")
 	CONFIG = Config(MODULE_PATH)
 	conn = Scraper(CONFIG.diploUrl, os.path.join(MODULE_PATH, "failed"))
 	conn.connect(CONFIG.diploUsername, CONFIG.diploPassword)
