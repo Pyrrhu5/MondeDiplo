@@ -62,9 +62,6 @@ git --version
 ```
 
 Clone it
-```bash
-git clone https://aymericdeschard@bitbucket.org/aymericdeschard/nikoniko.git
-```
 
 **Virtual env**
 
